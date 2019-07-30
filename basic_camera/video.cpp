@@ -59,12 +59,6 @@ void video::cam()
 
 }
 
-
-void video::set_thread_flag(int val)
-{
-	thread_flag = val;
-}
-
 void video::save()
 {
 		cv::Mat picture;
@@ -73,18 +67,24 @@ void video::save()
 
 		std::cout << "Please enter your photo's format type :JPG or PNG.\n";
 		std::cin >> type;
-		
+	
+	
 		if (type == "JPG" || type == "jpg")
 		{
-			cv::imwrite("C:/Users/hp/Desktop/picture.jpg", frame);
+			cv::imwrite("C:/Users/hp/Desktop/pictures/1.jpg", frame);
 		}
-		else if(type == "png" || type == "png")
+		else if(type == "PNG" || type == "png")
 		{
-			cv::imwrite("C:/Users/hp/Desktop/picture.png", frame);
+			cv::imwrite("C:/Users/hp/Desktop/pictures/2.png", frame);
 		}
 
 		cv::namedWindow("picture", cv::WINDOW_AUTOSIZE);
 		cv::imshow("picture", frame);
 		cv::waitKey(0);
+}
+
+void video::set_thread_flag(int val)
+{
+	thread_flag = val;
 }
 

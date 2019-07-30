@@ -18,5 +18,4 @@ public:
 
 private:
 	std::string input;
-	std::string save_type;
 };

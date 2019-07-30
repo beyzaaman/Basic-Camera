@@ -1,4 +1,3 @@
-
 #include "pch.h"
 #include <iostream>
 #include "console.h"
@@ -9,4 +8,5 @@ int main()
 	start.welcome();
 	return 0;
 }
+
 

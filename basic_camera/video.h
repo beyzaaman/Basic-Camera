@@ -7,22 +7,23 @@
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include <atomic>
-#include <mutex>
 
 class video
 {
 public:
 	video();
 	~video();
+	void cam();
 	void open_cam();
 	void close_cam();
-	void cam();
-	void capture();
 	void set_thread_flag(int val);
+	void save();
 
 private:
+	cv::VideoCapture camera;
 	std::thread thread_vid;
 	std::atomic <int> thread_flag;
-	int type;
+	std::string type;
+	
 
 };

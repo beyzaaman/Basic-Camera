@@ -4,9 +4,8 @@
 #include "video.h"
 int main()
 {
-	console start;
-	start.welcome();
+	console console;
+	console.console_screen();
 	return 0;
 }
-
 

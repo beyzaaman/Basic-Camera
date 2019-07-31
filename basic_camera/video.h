@@ -7,25 +7,27 @@
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include <atomic>
-#include <fstream>
 
 class video
 {
+public:
+
 public:
 	video();
 	~video();
 	void open_cam();
 	void close_cam();
-	void set_thread_flag(int val);
+	void capture_image(std::string filename, std::string type);
 	
 
 private:
-	std::string type;
-	cv::VideoCapture camera;
+	std::string type_;
+	std::string filename_;
 	std::thread thread_vid;
-	std::atomic <int> thread_flag;
+	std::atomic<bool> playing;
+	std::atomic<bool> capture;
 	
 private:
 	void cam();
-	void save();
+	void save(const cv::Mat& frame);
 };

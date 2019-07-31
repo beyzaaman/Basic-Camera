@@ -1,90 +1,75 @@
 #include "pch.h"
 #include "video.h"
-//
-//namespace
-//{
-//	int jpg(0);
-//		int png(1);
-//		int exit(2);
-//}
+
 
 video::video() :
-	camera(0),
-	thread_flag(1)
+	playing(false),
+	capture(false)
 {
 }
 
 video::~video()
 {	
-	if (thread_vid.joinable())
-	{
-		thread_vid.join();
-		thread_flag = 0;
-	}
+	close_cam();
 }
 
 void video::open_cam()
 {
+	playing = true;
+
 	thread_vid = std::thread (&video::cam,this);
 
 }
 
 void video::close_cam()
 {
+	playing = false;
+
 	if (thread_vid.joinable())
 	{
-		thread_flag = 0;
 		thread_vid.join();
-
 	}
+
 }
 
 void video::cam()
 {
+	cv::VideoCapture camera(0);
 	camera.open(0);
 	cv::Mat screen;
 	cv::namedWindow("screen", cv::WINDOW_AUTOSIZE);
-	cv::Mat live;
+	cv::Mat frame;
 
-	while (thread_flag==1)
+	while(playing)
 	{
-		camera >> live;
-		cv::imshow("screen", live);
+		camera >> frame;
+		cv::imshow("screen", frame);
 		cv::waitKey(40);
-	}
-	if (thread_flag == 0)
-	{
-		save();
-	}
 
-}
-
-void video::save()
-{
-		cv::Mat picture;
-		cv::Mat frame;
-		camera>> frame;
-
-		std::cout << "Please enter your photo's format type :JPG or PNG.\n";
-		std::cin >> type;
-	
-	
-		if (type == "JPG" || type == "jpg")
+		if (capture)
 		{
-			cv::imwrite("C:/Users/hp/Desktop/pictures/1.jpg", frame);
-		}
-		else if(type == "PNG" || type == "png")
-		{
-			cv::imwrite("C:/Users/hp/Desktop/pictures/2.png", frame);
+			save(frame);
+			capture = false;
 		}
 
-		cv::namedWindow("picture", cv::WINDOW_AUTOSIZE);
-		cv::imshow("picture", frame);
-		cv::waitKey(0);
+	}
 }
 
-void video::set_thread_flag(int val)
+void video::save(const cv::Mat& frame)
 {
-	thread_flag = val;
+	
+	cv::imwrite(("C:/Users/hp/Desktop/pictures/" + filename_ + type_), frame);
+
+	cv::namedWindow("picture", cv::WINDOW_AUTOSIZE);
+	cv::imshow("picture", frame);
+	cv::waitKey(2000);
+}
+
+void video::capture_image(std::string filename, std::string type)
+{
+	filename_ = filename;
+	type_ = type;
+
+	capture = true;
 }
 

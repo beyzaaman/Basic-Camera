@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include <atomic>
+#include "video.h"
 
 
 class console
@@ -14,8 +15,9 @@ class console
 public:
 	console();
 	~console();
-	void welcome();
+	void console_screen();
 
 private:
-	std::string input;
+	video video;
+	std::atomic <bool> run_loop;
 };

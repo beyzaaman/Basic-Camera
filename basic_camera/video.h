@@ -11,8 +11,6 @@
 class video
 {
 public:
-
-public:
 	video();
 	~video();
 	void open_cam();

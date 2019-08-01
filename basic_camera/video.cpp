@@ -57,7 +57,6 @@ void video::cam()
 
 void video::save(const cv::Mat& frame)
 {
-	
 	cv::imwrite(("C:/Users/hp/Desktop/pictures/" + filename_ + type_), frame);
 
 	cv::namedWindow("picture", cv::WINDOW_AUTOSIZE);
@@ -72,4 +71,3 @@ void video::capture_image(std::string filename, std::string type)
 
 	capture = true;
 }
-

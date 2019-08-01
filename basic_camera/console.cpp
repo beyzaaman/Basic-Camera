@@ -42,5 +42,4 @@ void console::console_screen()
 		}
 	}
 		
-
 }

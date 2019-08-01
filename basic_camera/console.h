@@ -7,19 +7,16 @@
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include <atomic>
+#include "video.h"
+
 
 class console
-{
-public:
-	
-	std::thread display_th;
-	std::string input;
-
+{	
 public:
 	console();
 	~console();
-	void take_pic();
-	void choose_type();
+	void console_screen();
 
-
+private:
+	video video;
 };

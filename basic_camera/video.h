@@ -15,7 +15,17 @@ public:
 	~video();
 	void open_cam();
 	void close_cam();
-	void cam();
-	void save_image();
+	void capture_image(const std::string& filename, const std::string& type);
+	
 
+private:
+	std::string type_;
+	std::string filename_;
+	std::thread thread_vid;
+	std::atomic<bool> playing;
+	std::atomic<bool> capture;
+	
+private:
+	void cam();
+	void save(const cv::Mat& frame);
 };

@@ -15,7 +15,7 @@ console::~console()
 void console::console_screen()
 {	
 	video.open_cam();
-	while (run_loop)
+	while (true)
 	{
 		std::cout << "Please enter filename and saving format -for example file.jpg- when you want to take a photo. To exit, please enter 'q' \n";
 		std::string input;
@@ -23,10 +23,11 @@ void console::console_screen()
 
 		if (!(input != "q" ^ input != ""))
 		{
-			std::string filename;
-			std::string type;
-			if (input.find(".")!=std::string::npos)
+			if (input[0]!='.' && input.find(".")!=std::string::npos)
 			{
+				std::string filename;
+				std::string type;
+
 				std::size_t pos = input.find(".");
 				filename = input.substr(0, pos);
 				type = input.substr(pos);
@@ -38,7 +39,7 @@ void console::console_screen()
 
 		else
 		{
-			run_loop = false;
+			return;
 		}
 	}
 		

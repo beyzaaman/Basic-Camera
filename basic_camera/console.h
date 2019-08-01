@@ -19,5 +19,4 @@ public:
 
 private:
 	video video;
-	std::atomic <bool> run_loop;
 };

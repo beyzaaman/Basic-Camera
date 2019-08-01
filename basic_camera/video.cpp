@@ -36,7 +36,6 @@ void video::cam()
 {
 	cv::VideoCapture camera(0);
 	camera.open(0);
-	cv::Mat screen;
 	cv::namedWindow("screen", cv::WINDOW_AUTOSIZE);
 	cv::Mat frame;
 
@@ -64,7 +63,7 @@ void video::save(const cv::Mat& frame)
 	cv::waitKey(2000);
 }
 
-void video::capture_image(std::string filename, std::string type)
+void video::capture_image(const std::string& filename, const std::string& type)
 {
 	filename_ = filename;
 	type_ = type;

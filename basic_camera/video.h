@@ -15,7 +15,7 @@ public:
 	~video();
 	void open_cam();
 	void close_cam();
-	void capture_image(std::string filename, std::string type);
+	void capture_image(const std::string& filename, const std::string& type);
 	
 
 private:
